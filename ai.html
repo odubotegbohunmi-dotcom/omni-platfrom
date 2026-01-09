@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OMNI • AI</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">OMNI</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="tools.html">Tools</a></li>
+    <li><a href="ai.html" class="active">AI</a></li>
+    <li><a href="play.html">Play</a></li>
+    <li><a href="learn.html">Learn</a></li>
+  </ul>
+</nav>
+
+<main class="page">
+  <h1>🤖 AI Assistant</h1>
+  <p class="subtitle">Your smart thinking partner</p>
+
+  <div class="ai-container">
+    <div id="chatBox" class="chat-box">
+      <div class="message ai">Hi! I'm OMNI AI. How can I help you today?</div>
+    </div>
+    <div class="chat-input">
+      <input id="userInput" placeholder="Ask me anything..." onkeypress="handleEnter(event)">
+      <button class="btn primary" onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OMNI • Learn</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">OMNI</div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="tools.html">Tools</a></li>
+    <li><a href="ai.html">AI</a></li>
+    <li><a href="play.html">Play</a></li>
+    <li><a href="learn.html" class="active">Learn</a></li>
+  </ul>
+</nav>
+
+<main class="page">
+  <h1>📚 Learn</h1>
+  <p class="subtitle">Grow your skills every day</p>
+
+  <div class="tool-grid">
+    <div class="tool-card" onclick="openLesson('study')">
+      <h3>📘 Study Tools</h3>
+      <p>Use summarizers and converters to learn faster</p>
+    </div>
+
+    <div class="tool-card" onclick="openLesson('tips')">
+      <h3>💡 Daily Tips</h3>
+      <p>Get a random learning tip</p>
+    </div>
+
+    <div class="tool-card" onclick="openLesson('progress')">
+      <h3>📊 Track Progress</h3>
+      <p>See your learning streak</p>
+    </div>
+  </div>
+
+  <div class="tool-panel">
+    <div id="study" class="tool-box hidden">
+      <h2>Study Tools</h2>
+      <p>Use our Tools section to summarize notes and study smarter.</p>
+      <a href="tools.html" class="btn primary">Go to Tools</a>
+    </div>
+
+    <div id="tips" class="tool-box hidden">
+      <h2>Daily Tip</h2>
+      <p id="tipOutput">Click below to get a tip</p>
+      <button class="btn primary" onclick="showTip()">Get Tip</button>
+    </div>
+
+    <div id="progress" class="tool-box hidden">
+      <h2>Your Progress</h2>
+      <p>Learning streak: <strong>3 days</strong> 🔥</p>
+      <p>Tools used: <strong>12 times</strong></p>
+      <p>Games played: <strong>8 times</strong></p>
+    </div>
+  </div>
+</main>
+
+<script src="js/main.js"></script>
+</body>
+</html>
