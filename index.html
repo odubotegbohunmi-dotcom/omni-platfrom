@@ -5,30 +5,140 @@
   <title>OMNI — Everything You Need</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* User info in navbar */
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      background: rgba(56, 189, 248, 0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .user-email {
+      color: #38bdf8;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .logout-btn {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: rgba(239, 68, 68, 0.3);
+      transform: translateY(-2px);
+    }
+
+    /* Welcome section for logged in users */
+    .welcome-section {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(99, 102, 241, 0.1));
+      border-radius: 20px;
+      margin: 0 20px 40px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .welcome-section h2 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #38bdf8, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Loading state */
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      opacity: 0.7;
+    }
+
+    .spinner-large {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(56, 189, 248, 0.3);
+      border-top-color: #38bdf8;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
 
 <nav class="navbar">
   <div class="logo">OMNI</div>
-  <ul>
+  <ul id="navMenu">
     <li><a href="index.html">Home</a></li>
     <li><a href="tools.html">Tools</a></li>
     <li><a href="ai.html">AI</a></li>
     <li><a href="play.html">Play</a></li>
     <li><a href="learn.html">Learn</a></li>
-    <li><a href="auth.html" class="cta">Get Started</a></li>
+    <li id="authNavItem"><a href="auth.html" class="cta">Get Started</a></li>
   </ul>
+  <div id="userNavInfo" style="display: none;">
+    <div class="user-info">
+      <span class="user-email" id="navUserEmail"></span>
+      <button class="logout-btn" onclick="handleLogout()">Logout</button>
+    </div>
+  </div>
 </nav>
 
-<!-- HERO -->
-<header class="hero">
-  <h1>One Platform. Everything You Need.</h1>
-  <p>Tools, AI, learning, play, and community — unified.</p>
-  <div class="hero-buttons">
-    <a href="auth.html" class="btn primary">Get Started Free</a>
-    <a href="#features" class="btn secondary">Explore</a>
+<!-- Loading State -->
+<div class="loading" id="loadingState">
+  <div class="spinner-large"></div>
+  <p style="margin-top: 16px;">Loading...</p>
+</div>
+
+<!-- Content for logged OUT users -->
+<div id="loggedOutContent">
+  <!-- HERO -->
+  <header class="hero">
+    <h1>One Platform. Everything You Need.</h1>
+    <p>Tools, AI, learning, play, and community — unified.</p>
+    <div class="hero-buttons">
+      <a href="auth.html" class="btn primary">Get Started Free</a>
+      <a href="#features" class="btn secondary">Explore</a>
+    </div>
+  </header>
+</div>
+
+<!-- Content for logged IN users -->
+<div id="loggedInContent" style="display: none;">
+  <!-- WELCOME SECTION -->
+  <div class="welcome-section">
+    <h2>Welcome back, <span id="userName"></span>! 👋</h2>
+    <p style="opacity: 0.8;">Ready to be productive?</p>
   </div>
-</header>
+
+  <!-- HERO for logged in users -->
+  <header class="hero" style="padding-top: 40px;">
+    <h1>Your OMNI Dashboard</h1>
+    <p>Pick up where you left off</p>
+  </header>
+</div>
 
 <!-- QUICK ACTIONS -->
 <section class="quick-actions">
@@ -232,7 +342,7 @@
 </section>
 
 <!-- CTA SECTION -->
-<section class="cta-section">
+<section class="cta-section" id="ctaSection">
   <h2>Ready to Get Started?</h2>
   <p>Join thousands using OMNI every day</p>
   <a href="auth.html" class="btn primary large">Create Free Account</a>
@@ -267,6 +377,72 @@
   </div>
   <p class="footer-bottom">© 2026 OMNI — Built for everyone</p>
 </footer>
+
+<!-- Firebase SDK -->
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDo4R4QbOv8mIbO5NK6k7N72QwGLEeTXIA",
+    authDomain: "omni-platform-e5bce.firebaseapp.com",
+    projectId: "omni-platform-e5bce",
+    storageBucket: "omni-platform-e5bce.firebasestorage.app",
+    messagingSenderId: "263102189066",
+    appId: "1:263102189066:web:5d8468848e4a8104ad99f3"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // Make signOut available globally
+  window.handleLogout = async function() {
+    try {
+      await signOut(auth);
+      window.location.reload();
+    } catch (error) {
+      console.error('Logout error:', error);
+      alert('Error logging out. Please try again.');
+    }
+  };
+
+  // Check authentication state
+  onAuthStateChanged(auth, (user) => {
+    const loadingState = document.getElementById('loadingState');
+    const loggedInContent = document.getElementById('loggedInContent');
+    const loggedOutContent = document.getElementById('loggedOutContent');
+    const userNavInfo = document.getElementById('userNavInfo');
+    const authNavItem = document.getElementById('authNavItem');
+    const ctaSection = document.getElementById('ctaSection');
+    
+    loadingState.style.display = 'none';
+    
+    if (user) {
+      // User is logged in
+      loggedInContent.style.display = 'block';
+      loggedOutContent.style.display = 'none';
+      userNavInfo.style.display = 'block';
+      authNavItem.style.display = 'none';
+      ctaSection.style.display = 'none';
+      
+      // Get user's first name from email
+      const email = user.email;
+      const firstName = email.split('@')[0];
+      const displayName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+      
+      document.getElementById('userName').textContent = displayName;
+      document.getElementById('navUserEmail').textContent = email;
+      
+    } else {
+      // User is logged out
+      loggedInContent.style.display = 'none';
+      loggedOutContent.style.display = 'block';
+      userNavInfo.style.display = 'none';
+      authNavItem.style.display = 'block';
+      ctaSection.style.display = 'block';
+    }
+  });
+</script>
 
 <script src="js/main.js"></script>
 </body>
