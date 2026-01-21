@@ -3,51 +3,394 @@
 <head>
   <meta charset="UTF-8">
   <title>OMNI • Play</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .login-required {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .login-box {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
+      padding: 60px 40px;
+      border-radius: 24px;
+      text-align: center;
+      max-width: 500px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-box h2 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #38bdf8, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .login-box p {
+      opacity: 0.8;
+      margin-bottom: 32px;
+      font-size: 1.1rem;
+    }
+
+    .lock-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      background: rgba(56, 189, 248, 0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .user-email {
+      color: #38bdf8;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .logout-btn {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: rgba(239, 68, 68, 0.3);
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 <body>
 
+<div id="loginRequired" class="login-required" style="display: none;">
+  <div class="login-box">
+    <div class="lock-icon">🔒</div>
+    <h2>Login Required</h2>
+    <p>Games are available for registered users. Create a free account to play!</p>
+    <a href="auth.html" class="btn primary large">Sign Up / Log In</a>
+    <br><br>
+    <a href="index.html" class="btn secondary">← Back to Home</a>
+  </div>
+</div>
+
 <nav class="navbar">
   <div class="logo">OMNI</div>
-  <ul>
+  <ul id="navMenu">
     <li><a href="index.html">Home</a></li>
     <li><a href="tools.html">Tools</a></li>
     <li><a href="ai.html">AI</a></li>
     <li><a href="play.html" class="active">Play</a></li>
     <li><a href="learn.html">Learn</a></li>
+    <li id="authNavItem"><a href="auth.html" class="cta">Get Started</a></li>
   </ul>
+  <div id="userNavInfo" style="display: none;">
+    <div class="user-info">
+      <span class="user-email" id="navUserEmail"></span>
+      <button class="logout-btn" onclick="handleLogout()">Logout</button>
+    </div>
+  </div>
 </nav>
 
-<main class="page">
-  <h1>🎮 Play Zone</h1>
-  <p class="subtitle">Level up your skills or just vibe out.</p>
-  
-  <div class="tool-grid">
-    <div class="tool-card" onclick="launchGame('guess')">
-      <div class="icon">🎯</div>
+<main class="page play-page">
+  <div class="play-header">
+    <h1>🎮 Play Zone</h1>
+    <p class="subtitle">Challenge yourself with fun, addictive games</p>
+  </div>
+
+  <div class="game-categories">
+    <button class="category-btn active" onclick="filterGames('all')">All Games</button>
+    <button class="category-btn" onclick="filterGames('skill')">Skill</button>
+    <button class="category-btn" onclick="filterGames('speed')">Speed</button>
+    <button class="category-btn" onclick="filterGames('brain')">Brain</button>
+  </div>
+
+  <div class="game-grid">
+    <div class="game-card" data-category="brain" onclick="openGame('guess')">
+      <div class="game-icon">🎯</div>
       <h3>Number Guess</h3>
-      <p>Can you beat the AI?</p>
+      <p>Guess the secret number between 1-10</p>
+      <div class="game-meta">
+        <span class="difficulty easy">Easy</span>
+        <span class="plays">2.1k plays</span>
+      </div>
     </div>
-    <div class="tool-card" onclick="launchGame('reaction')">
-      <div class="icon">⚡</div>
+
+    <div class="game-card" data-category="speed" onclick="openGame('reaction')">
+      <div class="game-icon">⚡</div>
       <h3>Reaction Test</h3>
-      <p>How fast are your clicks?</p>
+      <p>Test your reflexes and reaction speed</p>
+      <div class="game-meta">
+        <span class="difficulty medium">Medium</span>
+        <span class="plays">5.3k plays</span>
+      </div>
+    </div>
+
+    <div class="game-card" data-category="brain" onclick="openGame('memory')">
+      <div class="game-icon">🧠</div>
+      <h3>Memory Pattern</h3>
+      <p>Remember and repeat growing patterns</p>
+      <div class="game-meta">
+        <span class="difficulty hard">Hard</span>
+        <span class="plays">1.8k plays</span>
+      </div>
+    </div>
+
+    <div class="game-card" data-category="skill" onclick="openGame('typing')">
+      <div class="game-icon">⌨️</div>
+      <h3>Typing Speed</h3>
+      <p>Measure your words per minute</p>
+      <div class="game-meta">
+        <span class="difficulty medium">Medium</span>
+        <span class="plays">3.7k plays</span>
+      </div>
+    </div>
+
+    <div class="game-card" data-category="brain" onclick="openGame('math')">
+      <div class="game-icon">🔢</div>
+      <h3>Math Rush</h3>
+      <p>Solve math problems as fast as you can</p>
+      <div class="game-meta">
+        <span class="difficulty medium">Medium</span>
+        <span class="plays">2.9k plays</span>
+      </div>
+    </div>
+
+    <div class="game-card" data-category="speed" onclick="openGame('clicker')">
+      <div class="game-icon">🖱️</div>
+      <h3>Click Frenzy</h3>
+      <p>Click as fast as possible in 5 seconds</p>
+      <div class="game-meta">
+        <span class="difficulty easy">Easy</span>
+        <span class="plays">4.2k plays</span>
+      </div>
+    </div>
+
+    <div class="game-card" data-category="brain" onclick="openGame('color')">
+      <div class="game-icon">🎨</div>
+      <h3>Color Match</h3>
+      <p>Match the color, not the word</p>
+      <div class="game-meta">
+        <span class="difficulty hard">Hard</span>
+        <span class="plays">1.5k plays</span>
+      </div>
+    </div>
+
+    <div class="game-card" data-category="skill" onclick="openGame('aim')">
+      <div class="game-icon">🎯</div>
+      <h3>Aim Trainer</h3>
+      <p>Click moving targets with precision</p>
+      <div class="game-meta">
+        <span class="difficulty medium">Medium</span>
+        <span class="plays">3.1k plays</span>
+      </div>
     </div>
   </div>
 
-  <div id="gameOverlay" class="game-overlay hidden">
-    <div class="game-content">
-      <button class="close-btn" onclick="closeGame()">×</button>
-      <div id="gameContainer">
+  <div id="gameModal" class="game-modal hidden">
+    <div class="modal-content">
+      <button class="close-btn" onclick="closeGame()">✕</button>
+      
+      <div id="guess" class="game-container hidden">
+        <div class="game-title">
+          <div class="game-icon-large">🎯</div>
+          <h2>Number Guess</h2>
         </div>
+        <p class="game-instruction">I'm thinking of a number between 1 and 10. Can you guess it?</p>
+        <div class="game-input-group">
+          <input id="guessInput" type="number" min="1" max="10" placeholder="Enter 1-10">
+          <button class="btn primary" onclick="checkGuess()">Guess</button>
+        </div>
+        <div id="guessOutput" class="game-output"></div>
+        <div class="game-stats">
+          <div class="stat-item">Attempts: <span id="guessAttempts">0</span></div>
+        </div>
+      </div>
+
+      <div id="reaction" class="game-container hidden">
+        <div class="game-title">
+          <div class="game-icon-large">⚡</div>
+          <h2>Reaction Test</h2>
+        </div>
+        <p class="game-instruction">Click the button as soon as it turns green!</p>
+        <button id="reactionBtn" class="reaction-btn" onclick="handleReactionClick()">Click to Start</button>
+        <div id="reactionOutput" class="game-output"></div>
+      </div>
+
+      <div id="memory" class="game-container hidden">
+        <div class="game-title">
+          <div class="game-icon-large">🧠</div>
+          <h2>Memory Pattern</h2>
+        </div>
+        <p class="game-instruction">Watch the pattern, then repeat it!</p>
+        <div id="memoryDisplay" class="memory-display"></div>
+        <div class="game-input-group" id="memoryInputGroup" style="display:none;">
+          <input id="memoryInput" placeholder="Type the pattern">
+          <button class="btn primary" onclick="checkMemory()">Submit</button>
+        </div>
+        <button id="memoryStartBtn" class="btn primary" onclick="startMemory()">Start Game</button>
+        <div id="memoryOutput" class="game-output"></div>
+        <div class="game-stats">
+          <div class="stat-item">Round: <span id="memoryRound">0</span></div>
+        </div>
+      </div>
+
+      <div id="typing" class="game-container hidden">
+        <div class="game-title">
+          <div class="game-icon-large">⌨️</div>
+          <h2>Typing Speed</h2>
+        </div>
+        <p class="game-instruction">Type the text below as fast and accurately as you can!</p>
+        <div class="typing-target" id="typingText">The quick brown fox jumps over the lazy dog</div>
+        <textarea id="typingInput" placeholder="Start typing here..." rows="2"></textarea>
+        <button class="btn primary" onclick="checkTyping()">Check Speed</button>
+        <div id="typingOutput" class="game-output"></div>
+      </div>
+
+      <div id="math" class="game-container hidden">
+        <div class="game-title">
+          <div class="game-icon-large">🔢</div>
+          <h2>Math Rush</h2>
+        </div>
+        <p class="game-instruction">Solve as many problems as you can!</p>
+        <div id="mathQuestion" class="math-question">Click Start to begin</div>
+        <div class="game-input-group" id="mathInputGroup" style="display:none;">
+          <input id="mathInput" type="number" placeholder="Your answer">
+          <button class="btn primary" onclick="checkMath()">Submit</button>
+        </div>
+        <button id="mathStartBtn" class="btn primary" onclick="startMath()">Start</button>
+        <div id="mathOutput" class="game-output"></div>
+        <div class="game-stats">
+          <div class="stat-item">Score: <span id="mathScore">0</span></div>
+        </div>
+      </div>
+
+      <div id="clicker" class="game-container hidden">
+        <div class="game-title">
+          <div class="game-icon-large">🖱️</div>
+          <h2>Click Frenzy</h2>
+        </div>
+        <p class="game-instruction">Click the button as many times as possible in 5 seconds!</p>
+        <button id="clickButton" class="click-target" onclick="clickGame()" disabled>CLICK ME!</button>
+        <button class="btn primary" onclick="startClicker()">Start</button>
+        <div id="clickerOutput" class="game-output">Clicks: 0</div>
+      </div>
+
+      <div id="color" class="game-container hidden">
+        <div class="game-title">
+          <div class="game-icon-large">🎨</div>
+          <h2>Color Match</h2>
+        </div>
+        <p class="game-instruction">Click the button that matches the COLOR, not the word!</p>
+        <div id="colorWord" class="color-word"></div>
+        <div id="colorButtons" class="color-buttons"></div>
+        <div id="colorOutput" class="game-output"></div>
+        <div class="game-stats">
+          <div class="stat-item">Score: <span id="colorScore">0</span></div>
+        </div>
+      </div>
+
+      <div id="aim" class="game-container hidden">
+        <div class="game-title">
+          <div class="game-icon-large">🎯</div>
+          <h2>Aim Trainer</h2>
+        </div>
+        <p class="game-instruction">Click 10 targets as fast as you can!</p>
+        <div id="aimArea" class="aim-area">
+          <div id="aimTarget" class="aim-target" onclick="hitTarget()"></div>
+        </div>
+        <button class="btn primary" onclick="startAim()">Start</button>
+        <div id="aimOutput" class="game-output"></div>
+        <div class="game-stats">
+          <div class="stat-item">Hits: <span id="aimHits">0/10</span></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </main>
 
-<footer>
-  <p>© 2026 OMNI — Built for the future</p>
-</footer>
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDo4R4QbOv8mIbO5NK6k7N72QwGLEeTXIA",
+    authDomain: "omni-platform-e5bce.firebaseapp.com",
+    projectId: "omni-platform-e5bce",
+    storageBucket: "omni-platform-e5bce.firebasestorage.app",
+    messagingSenderId: "263102189066",
+    appId: "1:263102189066:web:5d8468848e4a8104ad99f3"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.handleLogout = async function() {
+    try {
+      await signOut(auth);
+      window.location.href = 'index.html';
+    } catch (error) {
+      console.error('Logout error:', error);
+      alert('Error logging out. Please try again.');
+    }
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    const loginRequired = document.getElementById('loginRequired');
+    const userNavInfo = document.getElementById('userNavInfo');
+    const authNavItem = document.getElementById('authNavItem');
+    
+    if (user) {
+      loginRequired.style.display = 'none';
+      userNavInfo.style.display = 'block';
+      authNavItem.style.display = 'none';
+      document.getElementById('navUserEmail').textContent = user.email;
+    } else {
+      loginRequired.style.display = 'flex';
+      userNavInfo.style.display = 'none';
+      authNavItem.style.display = 'block';
+    }
+  });
+</script>
 
 <script src="js/main.js"></script>
 </body>
