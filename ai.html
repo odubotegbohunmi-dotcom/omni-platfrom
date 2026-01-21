@@ -4,18 +4,130 @@
   <meta charset="UTF-8">
   <title>OMNI • AI</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .login-required {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .login-box {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.9));
+      padding: 60px 40px;
+      border-radius: 24px;
+      text-align: center;
+      max-width: 500px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+      animation: slideUp 0.5s ease-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-box h2 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #38bdf8, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .login-box p {
+      opacity: 0.8;
+      margin-bottom: 32px;
+      font-size: 1.1rem;
+    }
+
+    .lock-icon {
+      font-size: 4rem;
+      margin-bottom: 20px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px;
+      background: rgba(56, 189, 248, 0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.3);
+    }
+
+    .user-email {
+      color: #38bdf8;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .logout-btn {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .logout-btn:hover {
+      background: rgba(239, 68, 68, 0.3);
+      transform: translateY(-2px);
+    }
+  </style>
 </head>
 <body>
 
+<div id="loginRequired" class="login-required" style="display: none;">
+  <div class="login-box">
+    <div class="lock-icon">🔒</div>
+    <h2>Login Required</h2>
+    <p>Chat with AI is available for registered users only. Sign up for free!</p>
+    <a href="auth.html" class="btn primary large">Sign Up / Log In</a>
+    <br><br>
+    <a href="index.html" class="btn secondary">← Back to Home</a>
+  </div>
+</div>
+
 <nav class="navbar">
   <div class="logo">OMNI</div>
-  <ul>
+  <ul id="navMenu">
     <li><a href="index.html">Home</a></li>
     <li><a href="tools.html">Tools</a></li>
     <li><a href="ai.html" class="active">AI</a></li>
     <li><a href="play.html">Play</a></li>
     <li><a href="learn.html">Learn</a></li>
+    <li id="authNavItem"><a href="auth.html" class="cta">Get Started</a></li>
   </ul>
+  <div id="userNavInfo" style="display: none;">
+    <div class="user-info">
+      <span class="user-email" id="navUserEmail"></span>
+      <button class="logout-btn" onclick="handleLogout()">Logout</button>
+    </div>
+  </div>
 </nav>
 
 <main class="page">
@@ -32,6 +144,50 @@
     </div>
   </div>
 </main>
+
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
+  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDo4R4QbOv8mIbO5NK6k7N72QwGLEeTXIA",
+    authDomain: "omni-platform-e5bce.firebaseapp.com",
+    projectId: "omni-platform-e5bce",
+    storageBucket: "omni-platform-e5bce.firebasestorage.app",
+    messagingSenderId: "263102189066",
+    appId: "1:263102189066:web:5d8468848e4a8104ad99f3"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  window.handleLogout = async function() {
+    try {
+      await signOut(auth);
+      window.location.href = 'index.html';
+    } catch (error) {
+      console.error('Logout error:', error);
+      alert('Error logging out. Please try again.');
+    }
+  };
+
+  onAuthStateChanged(auth, (user) => {
+    const loginRequired = document.getElementById('loginRequired');
+    const userNavInfo = document.getElementById('userNavInfo');
+    const authNavItem = document.getElementById('authNavItem');
+    
+    if (user) {
+      loginRequired.style.display = 'none';
+      userNavInfo.style.display = 'block';
+      authNavItem.style.display = 'none';
+      document.getElementById('navUserEmail').textContent = user.email;
+    } else {
+      loginRequired.style.display = 'flex';
+      userNavInfo.style.display = 'none';
+      authNavItem.style.display = 'block';
+    }
+  });
+</script>
 
 <script src="js/main.js"></script>
 </body>
