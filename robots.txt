@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://odubotegbohunmi-dotcom.github.io/omni-platfrom/sitemap.xml
