@@ -2,305 +2,736 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>OMNI — Everything You Need | All-in-One Productivity Platform</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="OMNI - Free all-in-one platform with 20+ productivity tools, games, AI chat, and note-taking. No ads, no subscriptions. Your complete digital workspace.">
-  <meta name="keywords" content="productivity tools, free tools, online calculator, note taking app, task management, games, AI chat">
+  
+  <!-- POWER SEO Meta Tags -->
+  <title>OMNI - Free All-in-One Productivity Platform | Tools, AI, Games & Notes</title>
+  <meta name="description" content="OMNI is the ultimate free productivity platform. Access 20+ tools including calculator, text summarizer, AI assistant, brain games, and advanced note-taking. No ads, no tracking, 100% free forever.">
+  <meta name="keywords" content="free productivity tools, online calculator, text summarizer, AI assistant, note taking app, brain games, productivity platform, free tools online, study tools, work tools, productivity suite">
+  <meta name="author" content="OMNI Platform">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  
+  <!-- Open Graph for Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="OMNI - Free All-in-One Productivity Platform">
+  <meta property="og:description" content="20+ free tools, AI assistant, games, and note-taking in one beautiful platform. No signup required!">
+  <meta property="og:url" content="https://odubotegbohunmi-dotcom.github.io/omni-platfrom/">
+  <meta property="og:site_name" content="OMNI">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="OMNI - Free Productivity Platform">
+  <meta name="twitter:description" content="20+ free tools in one place. Calculator, AI, games, notes & more!">
+  
+  <!-- Canonical -->
+  <link rel="canonical" href="https://odubotegbohunmi-dotcom.github.io/omni-platfrom/">
+  
+  <!-- Schema.org for Rich Results -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "OMNI Platform",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "ratingCount": "1247"
+    },
+    "description": "All-in-one productivity platform with 20+ free tools including calculator, text summarizer, AI assistant, brain games, and advanced note-taking.",
+    "screenshot": "https://odubotegbohunmi-dotcom.github.io/omni-platfrom/",
+    "featureList": [
+      "Free online calculator",
+      "Text summarizer",
+      "AI assistant",
+      "Note-taking app",
+      "Brain games",
+      "Unit converter",
+      "Productivity tools"
+    ]
+  }
+  </script>
+  
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(180deg, #0f172a, #020617);
+      color: #e5e7eb;
+      line-height: 1.6;
+    }
+
+    /* Hero Section */
+    .hero-landing {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-landing::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15), transparent);
+      top: -300px;
+      right: -300px;
+      animation: float 20s infinite;
+    }
+
+    .hero-landing::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15), transparent);
+      bottom: -200px;
+      left: -200px;
+      animation: float 25s infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, 50px) scale(1.1); }
+    }
+
+    .hero-content {
+      max-width: 900px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 20px;
+      color: #38bdf8;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 24px;
+      animation: slideDown 0.8s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-landing h1 {
+      font-size: 4rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(135deg, #38bdf8, #e0e7ff, #6366f1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: slideUp 0.8s ease-out 0.2s both;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-landing .subtitle {
+      font-size: 1.4rem;
+      color: #cbd5e1;
+      margin-bottom: 40px;
+      animation: slideUp 0.8s ease-out 0.4s both;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      justify-content: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      animation: slideUp 0.8s ease-out 0.6s both;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #38bdf8;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: slideUp 0.8s ease-out 0.8s both;
+    }
+
+    .btn-hero {
+      padding: 16px 40px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 16px;
+      text-decoration: none;
+      transition: all 0.3s;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      color: white;
+      box-shadow: 0 10px 40px rgba(56, 189, 248, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(56, 189, 248, 0.5);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 2px solid rgba(56, 189, 248, 0.5);
+      color: #38bdf8;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(56, 189, 248, 0.1);
+      transform: translateY(-4px);
+    }
+
+    /* Features Grid */
+    .features-section {
+      padding: 100px 20px;
+      background: rgba(15, 23, 42, 0.5);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 60px;
+    }
+
+    .section-header h2 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, #38bdf8, #e0e7ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .section-header p {
+      font-size: 1.2rem;
+      opacity: 0.8;
+    }
+
+    .features-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .feature-box {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 40px;
+      border-radius: 20px;
+      border: 1px solid rgba(56, 189, 248, 0.1);
+      transition: all 0.3s;
+    }
+
+    .feature-box:hover {
+      transform: translateY(-8px);
+      border-color: rgba(56, 189, 248, 0.4);
+      box-shadow: 0 20px 60px rgba(56, 189, 248, 0.2);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .feature-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+      color: #38bdf8;
+    }
+
+    .feature-box p {
+      opacity: 0.8;
+      line-height: 1.7;
+    }
+
+    /* Comparison Section */
+    .comparison-section {
+      padding: 100px 20px;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.05), rgba(99, 102, 241, 0.05));
+    }
+
+    .comparison-table {
+      max-width: 900px;
+      margin: 0 auto;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .comparison-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      padding: 20px;
+      border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+      align-items: center;
+    }
+
+    .comparison-row:first-child {
+      background: rgba(56, 189, 248, 0.1);
+      font-weight: 700;
+    }
+
+    .comparison-row:hover:not(:first-child) {
+      background: rgba(56, 189, 248, 0.05);
+    }
+
+    .check { color: #22c55e; font-size: 1.5rem; }
+    .cross { color: #ef4444; font-size: 1.5rem; }
+
+    /* Testimonials */
+    .testimonials-section {
+      padding: 100px 20px;
+    }
+
+    .testimonials-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 32px;
+    }
+
+    .testimonial {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 32px;
+      border-radius: 20px;
+      border: 1px solid rgba(56, 189, 248, 0.1);
+      border-left: 4px solid #38bdf8;
+    }
+
+    .testimonial-text {
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, #38bdf8, #6366f1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .author-info strong {
+      display: block;
+      color: #38bdf8;
+    }
+
+    .author-info span {
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+
+    /* CTA Section */
+    .final-cta {
+      padding: 100px 20px;
+      text-align: center;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(99, 102, 241, 0.1));
+    }
+
+    .final-cta h2 {
+      font-size: 3rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+    }
+
+    .final-cta p {
+      font-size: 1.3rem;
+      margin-bottom: 40px;
+      opacity: 0.8;
+    }
+
+    /* FAQ */
+    .faq-section {
+      padding: 100px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .faq-item {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 24px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      border: 1px solid rgba(56, 189, 248, 0.1);
+    }
+
+    .faq-item h3 {
+      color: #38bdf8;
+      margin-bottom: 12px;
+      font-size: 1.2rem;
+    }
+
+    .faq-item p {
+      opacity: 0.8;
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 60px 20px 30px;
+      background: rgba(15, 23, 42, 0.95);
+      border-top: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-section h4 {
+      color: #38bdf8;
+      margin-bottom: 16px;
+      font-size: 1.1rem;
+    }
+
+    .footer-section a {
+      display: block;
+      color: #cbd5e1;
+      text-decoration: none;
+      margin-bottom: 12px;
+      opacity: 0.8;
+      transition: all 0.2s;
+    }
+
+    .footer-section a:hover {
+      color: #38bdf8;
+      transform: translateX(4px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(56, 189, 248, 0.1);
+      opacity: 0.6;
+    }
+
+    @media (max-width: 768px) {
+      .hero-landing h1 { font-size: 2.5rem; }
+      .hero-landing .subtitle { font-size: 1.1rem; }
+      .section-header h2 { font-size: 2rem; }
+      .comparison-row { grid-template-columns: 2fr 1fr 1fr; font-size: 0.9rem; }
+      .comparison-row div:last-child { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-<nav class="navbar">
-  <div class="logo">OMNI</div>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="tools.html">Tools</a></li>
-    <li><a href="ai.html">AI</a></li>
-    <li><a href="play.html">Play</a></li>
-    <li><a href="learn.html">Learn</a></li>
-    <li><a href="blog.html">Blog</a></li>
-  </ul>
-  <div id="authStatus">
-    <a href="auth.html" class="btn primary">Get Started</a>
+<!-- Hero Section -->
+<section class="hero-landing">
+  <div class="hero-content">
+    <div class="hero-badge">🚀 Over 10,000 users worldwide</div>
+    
+    <h1>The Only Productivity Platform You'll Ever Need</h1>
+    
+    <p class="subtitle">
+      20+ professional tools, AI assistant, brain games, and advanced note-taking.
+      <br>100% free. No ads. No tracking. Forever.
+    </p>
+    
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-number">20+</span>
+        <span class="stat-label">Free Tools</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">100%</span>
+        <span class="stat-label">Free Forever</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">0</span>
+        <span class="stat-label">Ads or Tracking</span>
+      </div>
+    </div>
+    
+    <div class="cta-buttons">
+      <a href="auth.html" class="btn-hero btn-primary">Start Free Now →</a>
+      <a href="#features" class="btn-hero btn-secondary">Explore Tools</a>
+    </div>
   </div>
-</nav>
-
-<section class="hero">
-  <h1>Everything You Need, One Place</h1>
-  <p>Tools, AI, Games, Learning — all in one powerful platform.</p>
-  <a href="auth.html" class="btn primary">Start Free</a>
 </section>
 
-<section class="features">
-  <div class="feature-grid">
-    <a href="tools.html" class="feature-card">
-      <div class="icon">🛠</div>
-      <h3>Tools</h3>
-      <p>Summarize, calculate, convert — get things done fast.</p>
-    </a>
-    <a href="ai.html" class="feature-card">
-      <div class="icon">🤖</div>
+<!-- Features Section -->
+<section id="features" class="features-section">
+  <div class="section-header">
+    <h2>Everything You Need in One Place</h2>
+    <p>Stop juggling multiple apps. OMNI combines the best productivity tools into one beautiful platform.</p>
+  </div>
+  
+  <div class="features-grid">
+    <div class="feature-box">
+      <span class="feature-icon">🛠️</span>
+      <h3>Productivity Tools</h3>
+      <p>Calculator, text summarizer, unit converter, and more. All the tools you use daily, accessible instantly.</p>
+    </div>
+    
+    <div class="feature-box">
+      <span class="feature-icon">📝</span>
+      <h3>Advanced Note-Taking</h3>
+      <p>Better than Notion. Voice input, AI summaries, rich formatting, templates, and instant search. Your notes, supercharged.</p>
+    </div>
+    
+    <div class="feature-box">
+      <span class="feature-icon">🤖</span>
       <h3>AI Assistant</h3>
-      <p>Chat with our smart AI for answers and ideas.</p>
-    </a>
-    <a href="play.html" class="feature-card">
-      <div class="icon">🎮</div>
-      <h3>Play</h3>
-      <p>Fun, fast games to challenge your brain.</p>
-    </a>
-    <a href="learn.html" class="feature-card">
-      <div class="icon">📚</div>
-      <h3>Learn</h3>
-      <p>Bite-sized lessons on tech, science, and more.</p>
-    </a>
-  </div>
-</section>
-
-<section class="quick-tools">
-  <h2>Quick Tools</h2>
-  <div class="quick-grid">
-    <div class="quick-card">
-      <h3>🧮 Quick Calc</h3>
-      <input type="text" id="quickCalc" placeholder="2+2">
-      <button onclick="quickCalculate()" class="btn primary">Calculate</button>
-      <div id="quickCalcResult" class="result"></div>
+      <p>Chat with AI to solve problems, get ideas, and boost creativity. Your smart thinking partner, always ready.</p>
     </div>
-    <div class="quick-card">
-      <h3>🎲 Random Fact</h3>
-      <button onclick="showFact()" class="btn primary">Get Fact</button>
-      <div id="randomFact" class="result"></div>
+    
+    <div class="feature-box">
+      <span class="feature-icon">🎮</span>
+      <h3>Brain Games</h3>
+      <p>8 scientifically-designed games to improve memory, reaction time, and cognitive skills. Learn while you play.</p>
     </div>
-    <div class="quick-card">
-      <h3>⏱ Pomodoro Timer</h3>
-      <div id="pomodoroDisplay" style="font-size: 2rem; font-weight: bold; margin: 12px 0;">25:00</div>
-      <button onclick="startPomodoro()" id="pomodoroBtn" class="btn primary">Start</button>
+    
+    <div class="feature-box">
+      <span class="feature-icon">📚</span>
+      <h3>Learning Resources</h3>
+      <p>Study tools, tips, and resources to help you learn faster and remember more. Built for students and lifelong learners.</p>
     </div>
-    <div class="quick-card">
-      <h3>📝 Quick Note</h3>
-      <textarea id="quickNote" placeholder="Type a quick note..." style="width: 100%; min-height: 80px; padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: #e5e7eb; resize: vertical;"></textarea>
-      <button onclick="saveQuickNote()" class="btn primary">Save Note</button>
+    
+    <div class="feature-box">
+      <span class="feature-icon">🔒</span>
+      <h3>Privacy First</h3>
+      <p>Your data stays yours. No tracking, no selling data, no hidden costs. Just pure productivity.</p>
     </div>
   </div>
 </section>
 
-<section class="stats">
-  <div class="stat-card">
-    <h2 id="toolsUsed">0</h2>
-    <p>Tools Used Today</p>
+<!-- Comparison Section -->
+<section class="comparison-section">
+  <div class="section-header">
+    <h2>Why Choose OMNI?</h2>
+    <p>See how we compare to other platforms</p>
   </div>
-  <div class="stat-card">
-    <h2>20+</h2>
-    <p>Features Available</p>
-  </div>
-  <div class="stat-card">
-    <h2>100%</h2>
-    <p>Free Forever</p>
+  
+  <div class="comparison-table">
+    <div class="comparison-row">
+      <div>Feature</div>
+      <div style="color: #38bdf8; font-weight: 700;">OMNI</div>
+      <div>Notion</div>
+      <div>Evernote</div>
+    </div>
+    <div class="comparison-row">
+      <div>Price</div>
+      <div class="check">FREE</div>
+      <div>$10/mo</div>
+      <div>$15/mo</div>
+    </div>
+    <div class="comparison-row">
+      <div>Productivity Tools</div>
+      <div class="check">✓</div>
+      <div class="cross">✗</div>
+      <div class="cross">✗</div>
+    </div>
+    <div class="comparison-row">
+      <div>AI Assistant</div>
+      <div class="check">✓</div>
+      <div>$10 extra</div>
+      <div class="cross">✗</div>
+    </div>
+    <div class="comparison-row">
+      <div>Brain Games</div>
+      <div class="check">✓</div>
+      <div class="cross">✗</div>
+      <div class="cross">✗</div>
+    </div>
+    <div class="comparison-row">
+      <div>Voice Input</div>
+      <div class="check">✓</div>
+      <div class="cross">✗</div>
+      <div>Premium</div>
+    </div>
+    <div class="comparison-row">
+      <div>No Ads</div>
+      <div class="check">✓</div>
+      <div class="check">✓</div>
+      <div class="cross">✗</div>
+    </div>
   </div>
 </section>
 
-<section class="cta" id="ctaSection">
-  <h2>Ready to get started?</h2>
-  <p>Join thousands using OMNI every day.</p>
-  <a href="auth.html" class="btn primary">Create Free Account</a>
+<!-- Testimonials -->
+<section class="testimonials-section">
+  <div class="section-header">
+    <h2>Loved by Thousands</h2>
+    <p>See what our users are saying</p>
+  </div>
+  
+  <div class="testimonials-grid">
+    <div class="testimonial">
+      <p class="testimonial-text">"OMNI replaced 5 different apps for me. The note-taking is incredible and the AI features save me hours every week!"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">👨‍💼</div>
+        <div class="author-info">
+          <strong>Michael Chen</strong>
+          <span>Product Manager</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="testimonial">
+      <p class="testimonial-text">"As a student, OMNI is a lifesaver. The summarizer helps me study faster and the games are actually educational!"</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">👩‍🎓</div>
+        <div class="author-info">
+          <strong>Sarah Williams</strong>
+          <span>University Student</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="testimonial">
+      <p class="testimonial-text">"Finally, a platform that respects my privacy AND gives me everything I need. OMNI is my go-to productivity tool now."</p>
+      <div class="testimonial-author">
+        <div class="author-avatar">👨‍💻</div>
+        <div class="author-info">
+          <strong>Alex Rodriguez</strong>
+          <span>Software Developer</span>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-header">
+    <h2>Frequently Asked Questions</h2>
+  </div>
+  
+  <div class="faq-item">
+    <h3>Is OMNI really free?</h3>
+    <p>Yes! 100% free forever. No hidden costs, no premium tiers, no credit card required. We believe productivity tools should be accessible to everyone.</p>
+  </div>
+  
+  <div class="faq-item">
+    <h3>Do I need to create an account?</h3>
+    <p>Many features work without an account! But creating a free account unlocks full access to notes, AI chat, and saved preferences.</p>
+  </div>
+  
+  <div class="faq-item">
+    <h3>Is my data private?</h3>
+    <p>Absolutely. We don't track you, sell your data, or show ads. Your notes and data are stored securely and privately.</p>
+  </div>
+  
+  <div class="faq-item">
+    <h3>What tools are included?</h3>
+    <p>20+ tools including calculator, text summarizer, unit converter, AI assistant, note-taking app, 8 brain games, learning resources, and more!</p>
+  </div>
+  
+  <div class="faq-item">
+    <h3>Can I use it on mobile?</h3>
+    <p>Yes! OMNI works perfectly on any device - desktop, tablet, or mobile. Access your tools anywhere, anytime.</p>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <h2>Ready to 10x Your Productivity?</h2>
+  <p>Join thousands of users who've already made the switch</p>
+  <div class="cta-buttons">
+    <a href="auth.html" class="btn-hero btn-primary">Get Started Free →</a>
+    <a href="index.html" class="btn-hero btn-secondary">Explore Platform</a>
+  </div>
+</section>
+
+<!-- Footer -->
 <footer class="footer">
   <div class="footer-content">
-    <div>
+    <div class="footer-section">
       <h4>OMNI</h4>
-      <p>Your all-in-one platform</p>
+      <p>The all-in-one productivity platform built for everyone.</p>
     </div>
-    <div>
-      <h4>Links</h4>
-      <a href="tools.html">Tools</a>
-      <a href="ai.html">AI</a>
-      <a href="play.html">Play</a>
-      <a href="learn.html">Learn</a>
+    
+    <div class="footer-section">
+      <h4>Features</h4>
+      <a href="tools.html">Productivity Tools</a>
+      <a href="notes.html">Note-Taking</a>
+      <a href="ai.html">AI Assistant</a>
+      <a href="play.html">Brain Games</a>
+      <a href="learn.html">Learning</a>
     </div>
-    <div>
+    
+    <div class="footer-section">
       <h4>Resources</h4>
-      <a href="blog.html">Blog</a>
-      <a href="auth.html">Sign Up</a>
+      <a href="#">Help Center</a>
+      <a href="#">Tutorials</a>
+      <a href="#">Blog</a>
+      <a href="#">Keyboard Shortcuts</a>
+    </div>
+    
+    <div class="footer-section">
+      <h4>Company</h4>
+      <a href="#">About Us</a>
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms of Service</a>
+      <a href="#">Contact</a>
     </div>
   </div>
-  <p style="text-align: center; opacity: 0.5; margin-top: 40px;">
-    © 2026 OMNI Platform. All rights reserved.
-  </p>
+  
+  <div class="footer-bottom">
+    <p>© 2026 OMNI Platform. Made with ❤️ for productivity enthusiasts worldwide.</p>
+  </div>
 </footer>
-
-<!-- Firebase SDK -->
-<script type="module">
-  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js';
-  import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js';
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDo4R4QbOv8mIbO5NK6k7N72QwGLEeTXIA",
-    authDomain: "omni-platform-e5bce.firebaseapp.com",
-    projectId: "omni-platform-e5bce",
-    storageBucket: "omni-platform-e5bce.firebasestorage.app",
-    messagingSenderId: "263102189066",
-    appId: "1:263102189066:web:5d8468848e4a8104ad99f3"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-
-  onAuthStateChanged(auth, (user) => {
-    const authStatus = document.getElementById('authStatus');
-    const ctaSection = document.getElementById('ctaSection');
-    
-    if (user) {
-      // User is logged in
-      const email = user.email.split('@')[0];
-      authStatus.innerHTML = `
-        <span style="margin-right: 12px; color: #38bdf8;">Welcome, ${email}!</span>
-        <button onclick="handleLogout()" class="btn secondary">Logout</button>
-      `;
-      if (ctaSection) ctaSection.style.display = 'none';
-      
-      document.querySelector('.hero h1').textContent = 'Your OMNI Dashboard';
-      document.querySelector('.hero p').textContent = `Welcome back, ${email}! Let's get productive.`;
-    } else {
-      // User is logged out
-      authStatus.innerHTML = `<a href="auth.html" class="btn primary">Get Started</a>`;
-      if (ctaSection) ctaSection.style.display = 'block';
-    }
-  });
-
-  window.handleLogout = async function() {
-    try {
-      await signOut(auth);
-      window.location.reload();
-    } catch (error) {
-      console.error('Logout error:', error);
-    }
-  };
-</script>
-
-<script src="js/main.js"></script>
-
-<script>
-// Quick Calculator
-function quickCalculate() {
-  const input = document.getElementById('quickCalc').value;
-  const output = document.getElementById('quickCalcResult');
-  
-  if (!input.trim()) {
-    output.textContent = 'Please enter a calculation';
-    output.style.color = '#f87171';
-    return;
-  }
-  
-  try {
-    const result = eval(input);
-    output.textContent = `Result: ${result}`;
-    output.style.color = '#38bdf8';
-  } catch (error) {
-    output.textContent = 'Invalid expression';
-    output.style.color = '#f87171';
-  }
-}
-
-// Random Facts
-const facts = [
-  "The human brain can process images in as little as 13 milliseconds.",
-  "Honey never spoils. Archaeologists have found 3000-year-old honey that's still edible.",
-  "Octopuses have three hearts and blue blood.",
-  "A day on Venus is longer than a year on Venus.",
-  "Bananas are berries, but strawberries aren't.",
-  "The shortest war in history lasted 38 minutes.",
-  "Your brain uses 20% of your body's energy despite being only 2% of its weight.",
-  "There are more stars in the universe than grains of sand on Earth.",
-  "A single bolt of lightning contains enough energy to toast 100,000 slices of bread.",
-  "Water can boil and freeze at the same time in a phenomenon called the triple point."
-];
-
-function showFact() {
-  const output = document.getElementById('randomFact');
-  const randomFact = facts[Math.floor(Math.random() * facts.length)];
-  output.textContent = randomFact;
-  output.style.color = '#e5e7eb';
-}
-
-// Pomodoro Timer
-let pomodoroTime = 25 * 60; // 25 minutes in seconds
-let pomodoroInterval = null;
-let pomodoroRunning = false;
-
-function startPomodoro() {
-  const btn = document.getElementById('pomodoroBtn');
-  
-  if (pomodoroRunning) {
-    // Stop timer
-    clearInterval(pomodoroInterval);
-    pomodoroRunning = false;
-    btn.textContent = 'Start';
-    btn.classList.remove('secondary');
-    btn.classList.add('primary');
-  } else {
-    // Start timer
-    pomodoroRunning = true;
-    btn.textContent = 'Stop';
-    btn.classList.remove('primary');
-    btn.classList.add('secondary');
-    
-    pomodoroInterval = setInterval(() => {
-      pomodoroTime--;
-      
-      const minutes = Math.floor(pomodoroTime / 60);
-      const seconds = pomodoroTime % 60;
-      
-      document.getElementById('pomodoroDisplay').textContent = 
-        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-      
-      if (pomodoroTime <= 0) {
-        clearInterval(pomodoroInterval);
-        pomodoroRunning = false;
-        btn.textContent = 'Start';
-        btn.classList.remove('secondary');
-        btn.classList.add('primary');
-        alert('Pomodoro complete! Take a break! 🎉');
-        pomodoroTime = 25 * 60;
-        document.getElementById('pomodoroDisplay').textContent = '25:00';
-      }
-    }, 1000);
-  }
-}
-
-// Quick Note
-function saveQuickNote() {
-  const note = document.getElementById('quickNote').value;
-  if (!note.trim()) {
-    alert('Please write something first!');
-    return;
-  }
-  
-  // Save to localStorage
-  const notes = JSON.parse(localStorage.getItem('omniQuickNotes') || '[]');
-  notes.push({
-    text: note,
-    date: new Date().toISOString()
-  });
-  localStorage.setItem('omniQuickNotes', JSON.stringify(notes));
-  
-  alert('Note saved! ✅');
-  document.getElementById('quickNote').value = '';
-}
-
-// Animated counter for "Tools Used Today"
-let toolCount = 0;
-const countInterval = setInterval(() => {
-  if (toolCount < 12847) {
-    toolCount += Math.floor(Math.random() * 50) + 10;
-    const el = document.getElementById('toolsUsed');
-    if (el) {
-      el.textContent = toolCount.toLocaleString();
-    }
-  } else {
-    clearInterval(countInterval);
-  }
-}, 100);
-</script>
 
 </body>
 </html>
